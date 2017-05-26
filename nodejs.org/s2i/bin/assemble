@@ -51,5 +51,11 @@ fi
 echo "---> Building your Node application from source"
 npm install -d
 
+# Only run the build script if one is present
+if [[ ! -z `npm run env | cut -d'=' -f1 | grep '^npm_package_scripts_build$'` ]]; then
+	echo "---> Running the npm package build script"
+	npm run build
+fi
+
 # Fix source directory permissions
 fix-permissions ./
